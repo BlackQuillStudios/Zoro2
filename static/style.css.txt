@@ -1,0 +1,449 @@
+/* static/style.css - LAYOUT & STRUCTURE ONLY */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden; /* Prevent body scroll */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    /* Default background/color removed - handled by theme */
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    /* Default background removed */
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    transition: width 0.3s ease, padding 0.3s ease;
+    overflow: hidden; /* Needed for collapse animation */
+    z-index: 5;
+    /* Default bg/border removed */
+}
+
+.sidebar-header {
+    padding: 15px 15px 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+    /* Default border removed */
+}
+
+.sidebar-header h2 {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.toggle-sidebar {
+    background: none;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    padding: 5px;
+    /* Default color removed */
+}
+
+
+.new-chat-button {
+    border: none;
+    border-radius: 6px;
+    padding: 12px 15px;
+    margin: 15px;
+    font-size: 0.95em;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+    white-space: nowrap;
+    /* Default color/bg removed */
+}
+
+.new-chat-button i {
+    margin-right: 10px;
+    font-size: 1em;
+}
+
+.chat-list {
+    list-style: none;
+    padding: 0 10px;
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-grow: 1;
+}
+
+/* --- Chat List Item Structure/Layout --- */
+.chat-list-item {
+    position: relative;
+    overflow: visible !important; /* Ensure dropdown isn't clipped */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px 12px 15px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    /* Default bg/color removed */
+}
+
+.chat-title {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 5px;
+    font-size: 0.9em;
+    /* Default color removed */
+}
+
+.chat-options-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 0.9em;
+    line-height: 1;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    margin-left: auto;
+    z-index: 2;
+    /* Default color removed */
+}
+
+/* --- Dropdown Menu Structure/Positioning --- */
+.chat-options-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 2px);
+    right: 5px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 6px 0;
+    min-width: 120px;
+    z-index: 100 !important; /* High z-index */
+    list-style: none;
+    margin: 0;
+    /* Default bg/border/color removed */
+}
+
+.chat-options-dropdown.show {
+    display: block !important; /* Make visible */
+}
+
+.chat-options-dropdown button {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 8px 15px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.9em;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    /* Default color removed */
+}
+
+.chat-options-dropdown button i {
+    margin-right: 8px;
+    width: 14px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+/* Placeholder Styling */
+.no-chats-placeholder {
+     cursor: default;
+     white-space: normal;
+}
+
+/* --- Sidebar Collapsed State --- */
+.app-container.sidebar-collapsed .sidebar {
+    width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border-right: none;
+}
+
+
+/* --- Main Chat Area --- */
+.main-chat-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    /* Default bg removed */
+}
+
+.chat-header {
+    padding: 15px 25px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    /* Default bg/border removed */
+}
+.chat-header span {
+    font-size: 1.1em;
+}
+.settings-button {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px;
+    /* Default color removed */
+}
+
+
+#chatbox {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* --- Messages Structure/Layout --- */
+.message {
+    display: flex;
+    align-items: flex-start;
+    max-width: 85%;
+    gap: 15px;
+}
+
+.message-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1em;
+    flex-shrink: 0;
+    /* Default color/bg removed */
+}
+
+.message-content {
+    padding: 12px 18px;
+    border-radius: 12px;
+    line-height: 1.5;
+    font-size: 0.95em;
+    position: relative;
+    word-wrap: break-word;
+    /* Default color/bg removed */
+}
+
+.message-content p {
+    margin: 0; /* Default paragraph margin reset */
+}
+/* Ensure paragraphs generated by Markdown inherit line height */
+.message-content p:not(:last-child) {
+     margin-bottom: 0.5em; /* Add space between paragraphs if needed */
+}
+
+
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+.user-message .message-content {
+    border-bottom-right-radius: 5px;
+}
+.ai-message {
+    align-self: flex-start;
+}
+.ai-message .message-content {
+    border-bottom-left-radius: 5px;
+}
+
+/* --- Input Area --- */
+#input-area {
+    display: flex;
+    padding: 20px 25px;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 10px;
+    /* Default bg/border removed */
+}
+
+#userInput {
+    flex-grow: 1;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 1em;
+    outline: none;
+    resize: none;
+    /* Default border/bg/color removed */
+}
+#userInput::placeholder {
+    opacity: 1;
+    /* Color defined in theme */
+}
+
+#userInput:disabled {
+    cursor: not-allowed;
+    /* Disabled style in theme */
+}
+
+#sendButton {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    line-height: 1;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+    height: 48px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Default bg/color removed */
+}
+
+#sendButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    /* Disabled style in theme */
+}
+
+
+/* Loading Indicator Styling */
+#loading-indicator {
+    padding-bottom: 5px;
+    text-align: center;
+    font-size: 0.9em;
+    font-style: italic;
+    /* Default bg/color removed */
+}
+
+/* Scrollbar Styling Structure (Colors in Theme) */
+/* Webkit */
+#chatbox::-webkit-scrollbar,
+.chat-list::-webkit-scrollbar { width: 8px; }
+#chatbox::-webkit-scrollbar-track,
+.chat-list::-webkit-scrollbar-track { border-radius: 4px; /* Background defined in theme */ }
+#chatbox::-webkit-scrollbar-thumb,
+.chat-list::-webkit-scrollbar-thumb { border-radius: 4px; /* Background and border defined in theme */ }
+/* Firefox */
+#chatbox, .chat-list { scrollbar-width: thin; /* Colors defined in theme */ }
+
+
+/* --- Settings Popup Structure/Layout --- */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 190;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    transition: background-color 0.3s ease;
+    /* Default bg removed */
+}
+.popup-overlay.show { display: block; }
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    z-index: 200;
+    overflow: hidden;
+    /* Default bg removed */
+}
+.popup.show { display: block; }
+
+.popup-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 20px;
+    /* Default border-bottom removed */
+}
+.popup-header h2 { margin: 0; font-size: 1.2em; font-weight: 600; }
+.close-popup-button { background: none; border: none; font-size: 1.8em; line-height: 1; cursor: pointer; padding: 0 5px; /* Default color removed */ }
+
+.popup-content { padding: 20px 25px; max-height: 60vh; overflow-y: auto; }
+.setting-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+.setting-item label { margin-right: 15px; font-weight: 500; white-space: nowrap; }
+.setting-item select { padding: 8px 12px; border-radius: 6px; min-width: 150px; cursor: pointer; flex-grow: 1; /* Default border/bg/color removed */ }
+.setting-item select:focus { outline: none; /* Focus border defined in theme */ }
+
+/* --- Structural styles for Markdown --- */
+.message-content pre { position: relative; padding-top: 35px; overflow-x: auto; margin: 10px 0; font-size: 0.9em; border-radius: 5px; /* Background, border, color in theme */ }
+.code-block-header { position: absolute; top: 0; left: 0; right: 0; padding: 5px 15px; border-top-left-radius: inherit; border-top-right-radius: inherit; display: flex; justify-content: space-between; align-items: center; height: 35px; box-sizing: border-box; /* Background, border-bottom in theme */ }
+.code-block-language { font-size: 0.8em; text-transform: lowercase; font-family: sans-serif; /* Color in theme */ }
+.copy-code-button { background: none; border: 1px solid transparent; cursor: pointer; padding: 3px 8px; font-size: 0.85em; border-radius: 4px; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; display: inline-flex; align-items: center; /* Color, hover effects in theme */ }
+.copy-code-button i { margin-right: 4px; }
+.copy-code-button.copied { cursor: default; /* Color change in theme */ }
+.message-content pre code { display: block; padding: 12px 15px; padding-top: 0; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; font-size: 1em; border-bottom-left-radius: inherit; border-bottom-right-radius: inherit; white-space: pre; overflow-x: auto; /* Background and color handled by theme/highlight.js */ }
+.message-content p > code, .message-content li > code { padding: 0.15em 0.4em; border-radius: 3px; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; font-size: 0.9em; /* Background, color in theme */ }
+.message-content ul, .message-content ol { margin-left: 25px; margin-top: 8px; margin-bottom: 8px; /* Color in theme */ }
+.message-content li { margin-bottom: 4px; }
+.message-content strong, .message-content b { font-weight: bold; }
+.message-content em, .message-content i { font-style: italic; }
+.message-content blockquote { padding-left: 15px; margin: 10px 0 10px 5px; font-style: italic; /* Border, color in theme */ }
+.message-content blockquote p { margin: 0; }
+.message-content table { border-collapse: collapse; margin: 15px 0; width: auto; font-size: 0.95em; /* Border in theme */ }
+.message-content th, .message-content td { padding: 8px 12px; text-align: left; /* Border, color in theme */ }
+.message-content th { font-weight: bold; /* Background, color in theme */ }
+.message-content hr { border: none; margin: 20px 0; /* Border-top in theme */ }
+
+/* Styles for the specific vertical setting item containing the textarea */
+.setting-item-vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+.setting-item-vertical label {
+     margin-right: 0;
+}
+.setting-item textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 80px;
+    /* Border, background, color handled by theme */
+}
+.setting-item textarea:focus {
+    outline: none;
+    /* Focus border handled by theme */
+}
+.setting-item small {
+    font-size: 0.8em;
+    opacity: 0.8;
+    /* Color handled by theme */
+}
+
+/* Syntax Highlighting - Base reset */
+.message-content .hljs {
+    color: inherit; /* Inherit base code text color from pre */
+    background: transparent !important; /* Ensure no background from hljs theme */
+    display: inline; /* Allow it to flow within pre code */
+}
