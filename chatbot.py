@@ -15,7 +15,7 @@ load_dotenv()
 
 # --- Configuration ---
 API_KEY = os.environ.get("GEMINI_API_KEY")
-IMAGE_GEN_MODEL = "gemini-1.5-flash-latest" # Use a capable model that supports image gen function calls
+IMAGE_GEN_MODEL = "gemini-2.5-pro-latest" # Use a capable model that supports image gen function calls
 # If you have specific access to the experimental image generation model:
 # IMAGE_GEN_MODEL = "gemini-2.0-flash-exp-image-generation" # Model specifically for image gen call example
 # Or more commonly, you'd use function calling with a multimodal model like 1.5 Pro/Flash
